@@ -22,13 +22,19 @@ public class App {
         List<Map<String, String>> listaDeFilmes = parser.parse(body);
 
         //Exibir e manipular os dados
-        for (Map<String,String> filme : listaDeFilmes) {
+        for (int i = 0; i<10; i++) {
+            Map<String, String> filme = listaDeFilmes.get(i);
             System.out.println("-------------------------------------");
-            System.out.print(filme.get("rank"));
-            System.out.print(". ");
-            System.out.println(filme.get("title"));
-            System.out.println(filme.get("year"));
+            System.out.print("\u001b[45m \u001b[37m" + filme.get("rank") + ". ");
+            System.out.println("\u001b[1m" + filme.get("title") + "\u001b[m");
+            System.out.println("\u001b[3m" + filme.get("year") + "\u001b[m");
             System.out.println(filme.get("imDbRating"));
+            double classificacao = Double.parseDouble(filme.get("imDbRating"));
+            int estrelas = (int) classificacao;
+            for(int n=1; n <= estrelas; n++){
+                System.out.print("⭐");
+            }
+            System.out.println();
             System.out.println("-------------------------------------");
         }
     }
