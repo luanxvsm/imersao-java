@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.InputStream;
@@ -30,7 +32,12 @@ public class stickers {
         graphics.setFont(fonte);
 
         //Escrever uma frase na nova imagem
-        graphics.drawString("FILMÃO", 250, novaAltura - 60);
+        String texto = "FILMÃO";
+        FontMetrics fontMetrics = graphics.getFontMetrics();
+        Rectangle2D retangulo = fontMetrics.getStringBounds(texto, graphics);
+        int larguraTexto = (int) retangulo.getWidth();
+        int posicaoTextoX = (largura - larguraTexto) / 2;
+        graphics.drawString(texto, posicaoTextoX, novaAltura - 60);
 
         //Escrever a nova imagem em um arquivo
         ImageIO.write(novaImagem, "png", new File(nomeArquivo));
